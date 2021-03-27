@@ -12,7 +12,7 @@ public class RoomReservationDao {
     private static String insertQuery = "INSERT INTO reservations (customer_id,customer_fname,customer_lname,start_date,end_date,capacity,reservation_code) VALUES (?,?,?,?,?,?,?)";
     private static String getAllReservationsQuery = "SELECT * WHERE customer_id = ? ";
     private static String getRoomQuery = "SELECT room WHERE reservation_code = ? ";
-
+    private static String deleteQuery = "DELETE from reservations WHERE reservation_code = ?";
     private static Connection connection = DBConnection.INSTANCE.getConnection();
     private static int first_code=10100;
 
