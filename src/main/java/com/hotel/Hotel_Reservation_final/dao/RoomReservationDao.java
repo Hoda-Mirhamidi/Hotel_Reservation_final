@@ -60,4 +60,14 @@ public class RoomReservationDao {
         }
 
     }
+
+    public static void cancel(String reservation_code){
+        try {
+            PreparedStatement cancelReservation = connection.prepareStatement(deleteQuery);
+            cancelReservation.setString(1,reservation_code);
+            cancelReservation.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
