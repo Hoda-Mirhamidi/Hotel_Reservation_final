@@ -21,7 +21,31 @@
         <servlet-name>reservation</servlet-name>
         <url-pattern>/reservation</url-pattern>
     </servlet-mapping>
-    
+
+    <filter>
+        <filter-name>idFilter</filter-name>
+        <filter-class>com.hotel.Hotel_Reservation_final.controller.filters.IdFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>idFilter</filter-name>
+        <servlet-name>reservation</servlet-name>
+    </filter-mapping>
+    <filter>
+        <filter-name>dateFilter</filter-name>
+        <filter-class>com.hotel.Hotel_Reservation_final.controller.filters.DateFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>dateFilter</filter-name>
+        <servlet-name>reservation</servlet-name>
+    </filter-mapping>
+    <filter>
+        <filter-name>capacityFilter</filter-name>
+        <filter-class>com.hotel.Hotel_Reservation_final.controller.filters.CapacityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>capacityFilter</filter-name>
+        <servlet-name>reservation</servlet-name>
+    </filter-mapping>
     
     
     
