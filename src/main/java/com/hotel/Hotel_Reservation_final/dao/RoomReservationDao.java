@@ -6,18 +6,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class RoomReservationDao {
 
     private static String insertQuery = "INSERT INTO reservations (customer_id,customer_fname,customer_lname,start_date,end_date,capacity,reservation_code) VALUES (?,?,?,?,?,?,?)";
-    private static String getAllReservationsQuery = "SELECT * WHERE customer_id = ? ";
-    private static String getRoomQuery = "SELECT room WHERE reservation_code = ? ";
+    private static String getAllReservationsQuery = "SELECT * FROM reservations WHERE customer_id = ? ";
+    private static String getAllInfoByCode = "SELECT * FROM reservations WHERE reservation_code = ? ";
     private static String deleteQuery = "DELETE from reservations WHERE reservation_code = ?";
+
     private static Connection connection = DBConnection.INSTANCE.getConnection();
-    private static int first_code=10100;
+
 
 
     public static void addRecord(int customer_id , String customer_fname , String customer_lname , String start , String end , int capacity){
+        Random r = new Random( System.currentTimeMillis() );
+        int random_code = r.nextInt(99999);
         try {
             PreparedStatement register = connection.prepareStatement(insertQuery);
             register.setInt(1,customer_id);
@@ -26,16 +30,16 @@ public class RoomReservationDao {
             register.setString(4,start);
             register.setString(5,end);
             register.setInt(6,capacity);
-            register.setString(7, String.valueOf(first_code));
+            register.setString(7, String.valueOf(random_code));
             register.executeUpdate();
             register.executeBatch();
-            PreparedStatement getRoomNumber = connection.prepareStatement(getRoomQuery);
-            getRoomNumber.setString(1, String.valueOf(first_code));
+            PreparedStatement getRoomNumber = connection.prepareStatement(getAllInfoByCode);
+            getRoomNumber.setString(1, String.valueOf(random_code));
             ResultSet rs = getRoomNumber.executeQuery();
+            rs.next();
             int room = rs.getInt("room");
             System.out.println("Reservation was successful ! ");
-            System.out.println("Reservation code : "+first_code+" , Room number : "+room);
-            first_code++;
+            System.out.println("Reservation code : "+random_code+" , Room number : "+room);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println("An error occurred ! Please try again ...");
