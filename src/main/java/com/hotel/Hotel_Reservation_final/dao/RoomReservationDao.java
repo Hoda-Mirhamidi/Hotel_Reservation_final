@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class RoomReservationDao {
@@ -15,9 +16,10 @@ public class RoomReservationDao {
     private static String getAllReservationsQuery = "SELECT * FROM reservations WHERE customer_id = ? ";
     private static String getAllInfoByCode = "SELECT * FROM reservations WHERE reservation_code = ? ";
     private static String deleteQuery = "DELETE from reservations WHERE reservation_code = ?";
-    private static String updateQuery = "UPDATE reservations SET customer_id = ? , customer_fname = ? , customer_lname = ? start_date = ? , end_date = ? , capacity = ? WHERE reservation_code = ?";
+    private static String updateQuery = "UPDATE reservations SET customer_id = ? , customer_fname = ? , customer_lname = ? , start_date = ? , end_date = ? , capacity = ? WHERE reservation_code = ?";
 
     private static Connection connection = DBConnection.INSTANCE.getConnection();
+    public static RoomReservation reservation = new RoomReservation();
 
 
 
@@ -83,6 +85,7 @@ public class RoomReservationDao {
             PreparedStatement reservationInfo = connection.prepareStatement(getAllInfoByCode);
             reservationInfo.setString(1,reservation_code);
             ResultSet rs = reservationInfo.executeQuery();
+            rs.next();
             int id = rs.getInt("customer_id");
             String fname = rs.getString("customer_fname");
             String lname = rs.getString("customer_lname");
@@ -92,6 +95,7 @@ public class RoomReservationDao {
             int room = rs.getInt("room");
             RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,reservation_code);
             reservation.setRoom(room);
+            System.out.println(reservation.toString());
             return reservation;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
