@@ -18,15 +18,15 @@ public class ModificationServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         String code = request.getParameter("code");
-        try {
-            RoomReservation reservation = RoomReservationDao.showAllInfo(code);
-            if(reservation != null){
-                out.println("Here's your last reservation information : ");
-                out.println(reservation.toString());
-                request.getRequestDispatcher("reservation.html").include(request,response);
-            }
-        }catch (NullPointerException e){
-            out.println("Code not found !");
+        RoomReservation reservation = RoomReservationDao.showAllInfo(code);
+        if(reservation != null) {
+           out.println("Here's your last reservation information : ");
+           out.println(reservation.toString());
+           RoomReservationDao.reservation = reservation;
+           request.getRequestDispatcher("reservation.html").include(request, response);
+        }
+        else{
+           out.println("Code not found !");
         }
         out.println("</body></html>");
     }
