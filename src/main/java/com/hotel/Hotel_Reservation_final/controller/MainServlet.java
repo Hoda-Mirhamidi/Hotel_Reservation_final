@@ -17,13 +17,13 @@ public class MainServlet extends HttpServlet {
             request.getRequestDispatcher("/reservation.html").include(request,response);
         }
         else if(option.equals("modify")){
-            request.getRequestDispatcher("/modification.html");
+            request.getRequestDispatcher("/modification.html").include(request,response);
         }
         else if(option.equals("view")){
-            request.getRequestDispatcher("/view.html");
+            request.getRequestDispatcher("/view.html").include(request,response);
         }
         else{
-            request.getRequestDispatcher("/cancellation.html");
+            request.getRequestDispatcher("/cancellation.html").include(request,response);
         }
 
     }
