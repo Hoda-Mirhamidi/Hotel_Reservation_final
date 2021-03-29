@@ -1,6 +1,7 @@
 package com.hotel.Hotel_Reservation_final.dao;
 
 import com.hotel.Hotel_Reservation_final.dbConnection.DBConnection;
+import com.hotel.Hotel_Reservation_final.model.RoomReservation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,12 +15,13 @@ public class RoomReservationDao {
     private static String getAllReservationsQuery = "SELECT * FROM reservations WHERE customer_id = ? ";
     private static String getAllInfoByCode = "SELECT * FROM reservations WHERE reservation_code = ? ";
     private static String deleteQuery = "DELETE from reservations WHERE reservation_code = ?";
+    //private static String updateQuery = "UPDATE reservations SET customer_id = ? , customer_fname = ? , customer_lname = ? start_date = ? , end_date = ? , capacity = ? WHERE reservation_code = ?";
 
     private static Connection connection = DBConnection.INSTANCE.getConnection();
 
 
 
-    public static void addRecord(int customer_id , String customer_fname , String customer_lname , String start , String end , int capacity){
+    public static RoomReservation addRecord(int customer_id , String customer_fname , String customer_lname , String start , String end , int capacity){
         Random r = new Random( System.currentTimeMillis() );
         int random_code = r.nextInt(99999);
         try {
@@ -40,10 +42,14 @@ public class RoomReservationDao {
             int room = rs.getInt("room");
             System.out.println("Reservation was successful ! ");
             System.out.println("Reservation code : "+random_code+" , Room number : "+room);
+            RoomReservation reservation = new RoomReservation(customer_id,customer_fname,customer_lname,start,end,capacity,String.valueOf(random_code));
+            reservation.setRoom(room);
+            return reservation;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println("An error occurred ! Please try again ...");
         }
+        return null;
     }
 
     public static void viewAllRecords(int customer_id){
@@ -74,4 +80,23 @@ public class RoomReservationDao {
             throwables.printStackTrace();
         }
     }
+
+    /*public static RoomReservation showAllInfo (String reservation_code){
+        try {
+            PreparedStatement reservationInfo = connection.prepareStatement(getAllInfoByCode);
+            reservationInfo.setString(1,reservation_code);
+            ResultSet rs = reservationInfo.executeQuery();
+            int id = rs.getInt("customer_id");
+            String fname = rs.getString("customer_fname");
+            String lname = rs.getString("customer_lname");
+            String start = rs.getString("start_date");
+            String end = rs.getString("end_date");
+            int capacity = rs.getInt("capacity");
+            RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,reservation_code);
+            return reservation;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }*/
 }
