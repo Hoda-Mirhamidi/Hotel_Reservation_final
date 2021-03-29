@@ -1,2 +1,100 @@
-package com.hotel.Hotel_Reservation_final.model;public class RoomReservation {
+package com.hotel.Hotel_Reservation_final.model;
+
+import java.util.Date;
+
+public class RoomReservation {
+    private int customer_id;
+    private String customer_fname;
+    private String customer_lname;
+    private Date start_date;
+    private Date end_date;
+    private int capacity;
+    private int room;
+    private String reservation_code;
+
+    public RoomReservation(int customer_id, String customer_fname, String customer_lname, Date start_date, Date end_date, int capacity, String reservation_code) {
+        this.customer_id = customer_id;
+        this.customer_fname = customer_fname;
+        this.customer_lname = customer_lname;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.capacity = capacity;
+        this.reservation_code = reservation_code;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+    public String getCustomer_fname() {
+        return customer_fname;
+    }
+
+    public void setCustomer_fname(String customer_fname) {
+        this.customer_fname = customer_fname;
+    }
+
+    public String getCustomer_lname() {
+        return customer_lname;
+    }
+
+    public void setCustomer_lname(String customer_lname) {
+        this.customer_lname = customer_lname;
+    }
+
+    public Date getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
+
+    public Date getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getRoom() {
+        return room;
+    }
+
+    public void setRoom(int room) {
+        this.room = room;
+    }
+
+    public String getReservation_code() {
+        return reservation_code;
+    }
+
+    public void setReservation_code(String reservation_code) {
+        this.reservation_code = reservation_code;
+    }
+
+    public String toString() {
+        return "RoomReservation{" +
+                "customer_id=" + customer_id +
+                ", customer_fname='" + customer_fname + '\'' +
+                ", customer_lname='" + customer_lname + '\'' +
+                ", start_date=" + start_date +
+                ", end_date=" + end_date +
+                ", capacity=" + capacity +
+                ", room=" + room +
+                '}';
+    }
 }
