@@ -51,23 +51,29 @@ public class RoomReservationDao {
         return null;
     }
 
-    public static void viewAllRecords(int customer_id){
+    public static LinkedList<RoomReservation> viewAllRecords(int customer_id){
+        LinkedList<RoomReservation> reservations = new LinkedList<>();
         try {
             PreparedStatement getAllReservations = connection.prepareStatement(getAllReservationsQuery);
             getAllReservations.setInt(1,customer_id);
             ResultSet rs = getAllReservations.executeQuery();
-            System.out.println("Customer First Name : "+rs.getString("customer_fname")+" , Customer Last Name : "+rs.getString("customer_lname"));
             while (rs.next()){
-                System.out.println("\nRESERVATION CODE : "+rs.getString("reservation_code"));
-                System.out.println("Starting date : "+rs.getString("start_date"));
-                System.out.println("Ending date : "+rs.getString("end_date"));
-                System.out.println("Room number : "+rs.getString("room"));
-                System.out.println("Capacity : "+rs.getString("capacity"));
+                String fname = rs.getString("customer_fname");
+                String lname = rs.getString("customer_lname");
+                String code = rs.getString("reservation_code");
+                String start = rs.getString("start_date");
+                String end = rs.getString("end_date");
+                int capacity = rs.getInt("capacity");
+                int room = rs.getInt("room");
+                RoomReservation reservation = new RoomReservation(customer_id,fname,lname,start,end,capacity,code);
+                reservation.setRoom(room);
+                reservations.add(reservation);
             }
+            return reservations;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
+        return null;
     }
 
     public static void cancel(String reservation_code){
