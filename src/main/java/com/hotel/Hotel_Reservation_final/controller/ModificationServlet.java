@@ -18,12 +18,18 @@ public class ModificationServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         String code = request.getParameter("code");
+        String option = request.getParameter("options");
         RoomReservation reservation = RoomReservationDao.showAllInfo(code);
-        if(reservation != null) {
-           out.println("Here's your last reservation information : ");
-           out.println(reservation.toString());
-           RoomReservationDao.reservation = reservation;
-           request.getRequestDispatcher("reservation.html").include(request, response);
+        if(reservation != null){
+            if(option.equals("view")){
+                out.println(reservation.toString());
+            }
+            else{
+                out.println("Here's your last reservation information : ");
+                out.println(reservation.toString());
+                RoomReservationDao.reservation = reservation;
+                request.getRequestDispatcher("reservation.html").include(request, response);
+            }
         }
         else{
            out.println("Code not found !");
