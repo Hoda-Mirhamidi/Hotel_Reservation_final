@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "ReservationServlet")
 public class ReservationServlet extends HttpServlet {
@@ -38,15 +39,14 @@ public class ReservationServlet extends HttpServlet {
         }
         else{
             String code = RoomReservationDao.reservation.getReservation_code();
-            try{
-                RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,code);
-                RoomReservation updatedReservation = RoomReservationDao.updateInfo(reservation);
-                if(updatedReservation != null){
-                    out.println("Update was Successful ! ");
-                    out.println("New Information : ");
-                    out.println(updatedReservation.toString());
-                }
-            }catch (NullPointerException e){
+            RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,code);
+            RoomReservation updatedReservation = RoomReservationDao.updateInfo(reservation);
+            if(updatedReservation != null) {
+                out.println("Update was Successful ! ");
+                out.println("New Information : ");
+                out.println(updatedReservation.toString());
+            }
+            else {
                 out.println("An error occurred ! Please try again ...");
                 request.getRequestDispatcher("index.jsp").include(request,response);
             }
