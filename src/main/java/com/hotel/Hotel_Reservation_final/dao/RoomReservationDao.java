@@ -15,7 +15,7 @@ public class RoomReservationDao {
     private static String getAllReservationsQuery = "SELECT * FROM reservations WHERE customer_id = ? ";
     private static String getAllInfoByCode = "SELECT * FROM reservations WHERE reservation_code = ? ";
     private static String deleteQuery = "DELETE from reservations WHERE reservation_code = ?";
-    //private static String updateQuery = "UPDATE reservations SET customer_id = ? , customer_fname = ? , customer_lname = ? start_date = ? , end_date = ? , capacity = ? WHERE reservation_code = ?";
+    private static String updateQuery = "UPDATE reservations SET customer_id = ? , customer_fname = ? , customer_lname = ? start_date = ? , end_date = ? , capacity = ? WHERE reservation_code = ?";
 
     private static Connection connection = DBConnection.INSTANCE.getConnection();
 
@@ -89,8 +89,29 @@ public class RoomReservationDao {
             String start = rs.getString("start_date");
             String end = rs.getString("end_date");
             int capacity = rs.getInt("capacity");
+            int room = rs.getInt("room");
             RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,reservation_code);
+            reservation.setRoom(room);
             return reservation;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static RoomReservation updateInfo(RoomReservation reservation){
+        try {
+            PreparedStatement updateInfo = connection.prepareStatement(updateQuery);
+            updateInfo.setInt(1,reservation.getCustomer_id());
+            updateInfo.setString(2,reservation.getCustomer_fname());
+            updateInfo.setString(3,reservation.getCustomer_lname());
+            updateInfo.setString(4,reservation.getStart_date());
+            updateInfo.setString(5,reservation.getEnd_date());
+            updateInfo.setInt(6,reservation.getCapacity());
+            updateInfo.setString(7,reservation.getReservation_code());
+            updateInfo.executeUpdate();
+            updateInfo.executeBatch();
+            return showAllInfo(reservation.getReservation_code());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
