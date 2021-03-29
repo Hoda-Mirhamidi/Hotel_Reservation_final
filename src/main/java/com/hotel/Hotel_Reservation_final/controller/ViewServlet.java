@@ -18,27 +18,13 @@ public class ViewServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         String id = request.getParameter("id");
-        String code = request.getParameter("code");
         out.println("<html><body>");
-        if(id.isEmpty() && code.isEmpty()){
-            out.println("both fields cannot be empty !");
+        LinkedList<RoomReservation> reservations = RoomReservationDao.viewAllRecords(Integer.parseInt(id));
+        if(reservations != null){
+            reservations.stream().map(RoomReservation::toString).forEach(out::println);
         }
-        else if(id.isEmpty()){
-            RoomReservation reservation = RoomReservationDao.showAllInfo(code);
-            out.println(reservation.toString());
-        }
-        else if(code.isEmpty()){
-            LinkedList<RoomReservation> reservations = RoomReservationDao.viewAllRecords(Integer.parseInt(id));
-            if(reservations != null){
-                reservations.stream().map(RoomReservation::toString).forEach(out::println);
-            }
-            else{
-                out.println("No reservations found ! ");
-            }
-        }else{
-            RoomReservation reservation = RoomReservationDao.showAllInfo(code);
-            assert reservation != null;
-            out.println(reservation.toString());
+        else{
+            out.println("No reservations found !");
         }
         out.println("</body></html>");
     }
