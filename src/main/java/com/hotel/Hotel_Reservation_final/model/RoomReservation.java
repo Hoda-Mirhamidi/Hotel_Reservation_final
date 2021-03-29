@@ -6,13 +6,13 @@ public class RoomReservation {
     private int customer_id;
     private String customer_fname;
     private String customer_lname;
-    private Date start_date;
-    private Date end_date;
+    private String start_date;
+    private String end_date;
     private int capacity;
     private int room;
     private String reservation_code;
 
-    public RoomReservation(int customer_id, String customer_fname, String customer_lname, Date start_date, Date end_date, int capacity, String reservation_code) {
+    public RoomReservation(int customer_id, String customer_fname, String customer_lname, String start_date, String end_date, int capacity, String reservation_code) {
         this.customer_id = customer_id;
         this.customer_fname = customer_fname;
         this.customer_lname = customer_lname;
@@ -46,19 +46,19 @@ public class RoomReservation {
         this.customer_lname = customer_lname;
     }
 
-    public Date getStart_date() {
+    public String getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(String start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public String getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(String end_date) {
         this.end_date = end_date;
     }
 
