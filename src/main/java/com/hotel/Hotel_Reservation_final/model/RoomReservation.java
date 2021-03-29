@@ -22,6 +22,10 @@ public class RoomReservation {
         this.reservation_code = reservation_code;
     }
 
+    public RoomReservation() {
+
+    }
+
     public int getCustomer_id() {
         return customer_id;
     }
@@ -87,14 +91,13 @@ public class RoomReservation {
     }
 
     public String toString() {
-        return "RoomReservation{" +
-                "customer_id=" + customer_id +
-                ", customer_fname='" + customer_fname + '\'' +
-                ", customer_lname='" + customer_lname + '\'' +
-                ", start_date=" + start_date +
-                ", end_date=" + end_date +
-                ", capacity=" + capacity +
-                ", room=" + room +
-                '}';
+        return "RoomReservation Information : " +
+                "Id = " + customer_id +
+                " , First Name='" + customer_fname + '\'' +
+                " , Last Name='" + customer_lname + '\'' +
+                " , Start Date=" + start_date +
+                " , End Date=" + end_date +
+                " , Capacity=" + capacity +
+                " , Room=" + room ;
     }
 }
