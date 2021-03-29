@@ -37,7 +37,7 @@ public class ReservationServlet extends HttpServlet {
             }
         }
         else{
-            String code = request.getParameter("code");
+            String code = RoomReservationDao.reservation.getReservation_code();
             try{
                 RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,code);
                 RoomReservation updatedReservation = RoomReservationDao.updateInfo(reservation);
@@ -48,8 +48,9 @@ public class ReservationServlet extends HttpServlet {
                 }
             }catch (NullPointerException e){
                 out.println("An error occurred ! Please try again ...");
-                request.getRequestDispatcher("reservation.html").include(request,response);
+                request.getRequestDispatcher("index.jsp").include(request,response);
             }
+            RoomReservationDao.reservation = new RoomReservation();
         }
         out.println("</body></html>");
     }
