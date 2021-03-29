@@ -6,10 +6,8 @@
 </h1>
 <br/>
 <form action="main" method="post">
-    <input type="radio" id="reservation" name="options" value="reserve">
-    <label for="reservation">Make a reservation</label><br>
-    <input type="radio" id="modification" name="options" value="modify">
-    <label for="modification">Modify your reservation info</label><br>
+    <input type="radio" id="reservationOrModification" name="options" value="reserve">
+    <label for="reservationOrModification">Make or modify a reservation :</label><br>
     <input type="radio" id="view" name="options" value="view">
     <label for="view">View your reservation info</label><br>
     <input type="radio" id="cancel" name="options" value="cancel">
