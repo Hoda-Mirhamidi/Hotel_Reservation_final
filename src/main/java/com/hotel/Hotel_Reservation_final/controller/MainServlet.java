@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "MainServlet")
 public class MainServlet extends HttpServlet {
@@ -24,8 +23,9 @@ public class MainServlet extends HttpServlet {
             request.getRequestDispatcher("/view.html");
         }
         else{
-            request.getRequestDispatcher("/cancel.html");
+            request.getRequestDispatcher("/cancellation.html");
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
