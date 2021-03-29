@@ -40,14 +40,11 @@ public class RoomReservationDao {
             ResultSet rs = getRoomNumber.executeQuery();
             rs.next();
             int room = rs.getInt("room");
-            System.out.println("Reservation was successful ! ");
-            System.out.println("Reservation code : "+random_code+" , Room number : "+room);
             RoomReservation reservation = new RoomReservation(customer_id,customer_fname,customer_lname,start,end,capacity,String.valueOf(random_code));
             reservation.setRoom(room);
             return reservation;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            System.out.println("An error occurred ! Please try again ...");
         }
         return null;
     }
@@ -81,7 +78,7 @@ public class RoomReservationDao {
         }
     }
 
-    /*public static RoomReservation showAllInfo (String reservation_code){
+    public static RoomReservation showAllInfo (String reservation_code){
         try {
             PreparedStatement reservationInfo = connection.prepareStatement(getAllInfoByCode);
             reservationInfo.setString(1,reservation_code);
@@ -98,5 +95,5 @@ public class RoomReservationDao {
             throwables.printStackTrace();
         }
         return null;
-    }*/
+    }
 }
