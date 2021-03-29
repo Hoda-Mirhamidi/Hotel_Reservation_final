@@ -26,13 +26,12 @@ public class ReservationServlet extends HttpServlet {
         out.println("<html><body>");
         String option = request.getParameter("options");
         if(option.equals("reserve")){
-            try{
-                RoomReservation reservation = RoomReservationDao.addRecord(id,fname,lname,start,end,capacity);
-                if(reservation != null){
-                    out.println("Reservation was successful ! ");
-                    out.println("Reservation code : "+reservation.getReservation_code()+" , Room number : "+reservation.getRoom());
-                }
-            }catch (NullPointerException exception){
+            RoomReservation reservation = RoomReservationDao.addRecord(id,fname,lname,start,end,capacity);
+            if(reservation != null){
+                out.println("Reservation was successful ! ");
+                out.println("Reservation code : "+reservation.getReservation_code()+" , Room number : "+reservation.getRoom());
+            }
+            else {
                 out.println("An error occurred ! Please try again ...");
                 request.getRequestDispatcher("reservation.html").include(request,response);
             }
