@@ -1,6 +1,7 @@
 package com.hotel.Hotel_Reservation_final.controller;
 
 import com.hotel.Hotel_Reservation_final.dao.RoomReservationDao;
+import com.hotel.Hotel_Reservation_final.model.RoomReservation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +15,25 @@ import java.io.PrintWriter;
 public class ReservationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
         int id = Integer.parseInt(request.getParameter("id"));
         String start = request.getParameter("start");
         String end = request.getParameter("end");
         int capacity = Integer.parseInt(request.getParameter("capacity"));
-        RoomReservationDao.addRecord(id,fname,lname,start,end,capacity);
-
+        out.println("<html><body>");
+        try{
+            RoomReservation reservation = RoomReservationDao.addRecord(id,fname,lname,start,end,capacity);
+            if(reservation != null){
+                out.println("Reservation was successful ! ");
+                out.println("Reservation code : "+reservation.getReservation_code()+" , Room number : "+reservation.getRoom());
+            }
+        }catch (NullPointerException exception){
+            out.println("An error occurred ! Please try again ...");
+            request.getRequestDispatcher("reservation.html").include(request,response);
+        }
+        out.println("</body></html>");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
