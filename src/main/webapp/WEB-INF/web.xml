@@ -12,7 +12,16 @@
         <servlet-name>main</servlet-name>
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+        <servlet-name>modification</servlet-name>
+        <servlet-class>com.hotel.Hotel_Reservation_final.controller.ModificationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modification</servlet-name>
+        <url-pattern>/modification</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>reservation</servlet-name>
         <servlet-class>com.hotel.Hotel_Reservation_final.controller.ReservationServlet</servlet-class>
@@ -20,16 +29,6 @@
     <servlet-mapping>
         <servlet-name>reservation</servlet-name>
         <url-pattern>/reservation</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>cancellation</servlet-name>
-        <servlet-class>com.hotel.Hotel_Reservation_final.controller.CancellationServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>cancellation</servlet-name>
-        <url-pattern>/cancellation</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -42,13 +41,14 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>modification</servlet-name>
-        <servlet-class>com.hotel.Hotel_Reservation_final.controller.ModificationServlet</servlet-class>
+        <servlet-name>cancellation</servlet-name>
+        <servlet-class>com.hotel.Hotel_Reservation_final.controller.CancellationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>modification</servlet-name>
-        <url-pattern>/modification</url-pattern>
+        <servlet-name>cancellation</servlet-name>
+        <url-pattern>/cancellation</url-pattern>
     </servlet-mapping>
+
 
     <filter>
         <filter-name>idFilter</filter-name>
@@ -56,27 +56,44 @@
     </filter>
     <filter-mapping>
         <filter-name>idFilter</filter-name>
-        <servlet-name>reservation</servlet-name>
+        <url-pattern>/reservation</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>idFilter</filter-name>
+        <url-pattern>/view</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>codeFilter</filter-name>
+        <filter-class>com.hotel.Hotel_Reservation_final.controller.filters.CodeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>codeFilter</filter-name>
+        <url-pattern>/modification</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>codeFilter</filter-name>
+        <url-pattern>/cancellation</url-pattern>
+    </filter-mapping>
+
+
     <filter>
         <filter-name>dateFilter</filter-name>
         <filter-class>com.hotel.Hotel_Reservation_final.controller.filters.DateFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>dateFilter</filter-name>
-        <servlet-name>reservation</servlet-name>
+        <url-pattern>/reservation</url-pattern>
     </filter-mapping>
+
     <filter>
         <filter-name>capacityFilter</filter-name>
         <filter-class>com.hotel.Hotel_Reservation_final.controller.filters.CapacityFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>capacityFilter</filter-name>
-        <servlet-name>reservation</servlet-name>
+        <url-pattern>/reservation</url-pattern>
     </filter-mapping>
-    
-    
-    
     
     
 </web-app>
