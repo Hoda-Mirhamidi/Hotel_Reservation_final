@@ -76,14 +76,16 @@ public class RoomReservationDao {
         return null;
     }
 
-    public static void cancel(String reservation_code){
+    public static boolean cancel(String reservation_code){
         try {
             PreparedStatement cancelReservation = connection.prepareStatement(deleteQuery);
             cancelReservation.setString(1,reservation_code);
             cancelReservation.executeUpdate();
+            return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
     }
 
     public static RoomReservation showAllInfo (String reservation_code){
