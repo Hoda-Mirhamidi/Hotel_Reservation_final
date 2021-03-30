@@ -21,7 +21,7 @@ public class ViewServlet extends HttpServlet {
         out.println("<html><body>");
         LinkedList<RoomReservation> reservations = RoomReservationDao.viewAllRecords(Integer.parseInt(id));
         if(reservations != null){
-            reservations.stream().map(RoomReservation::toString).forEach(out::println);
+            reservations.stream().map(RoomReservation::toString).forEach(r -> out.println(r + "<br><br>"));
         }
         else{
             out.println("No reservations found !");
