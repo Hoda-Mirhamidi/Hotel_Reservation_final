@@ -15,6 +15,8 @@ import java.util.Random;
 
 public class RoomReservationDaoH {
 
+    public static RoomReservation keptReservation = new RoomReservation();
+
     public static RoomReservation addRecord(int customer_id , String customer_fname , String customer_lname , String start , String end , int capacity){
         Random r = new Random( System.currentTimeMillis() );
         int random_code = r.nextInt(99999);
