@@ -77,6 +77,25 @@ public class RoomReservationDaoH {
         }
     }
 
+    public static boolean updateInfo(RoomReservation reservation){
+
+        Session session = HibernateUtil.sessionFactory.openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            session.update(reservation);
+            transaction.commit();
+            return true;
+        }catch (HibernateException exception){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
 
 
 }
