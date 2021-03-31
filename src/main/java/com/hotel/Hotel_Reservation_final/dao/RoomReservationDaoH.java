@@ -2,6 +2,7 @@ package com.hotel.Hotel_Reservation_final.dao;
 
 import com.hotel.Hotel_Reservation_final.hibernate.HibernateUtil;
 import com.hotel.Hotel_Reservation_final.model.RoomReservation;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -47,6 +48,26 @@ public class RoomReservationDaoH {
         RoomReservation reservation = session.get(RoomReservation.class,reservation_code);
         session.close();
         return reservation;
+    }
+
+    public static boolean cancel(String reservation_code){
+
+        Session session = HibernateUtil.sessionFactory.openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            RoomReservation reservation = showAllInfo(reservation_code);
+            session.delete(reservation);
+            transaction.commit();
+            return true;
+        }catch (HibernateException exception){
+            if(transaction != null){
+              transaction.rollback();
+            }
+            return false;
+        }finally {
+            session.close();
+        }
     }
 
 
