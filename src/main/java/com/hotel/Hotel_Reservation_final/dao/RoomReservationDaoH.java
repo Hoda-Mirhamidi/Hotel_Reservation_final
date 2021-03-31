@@ -4,6 +4,7 @@ import com.hotel.Hotel_Reservation_final.hibernate.HibernateUtil;
 import com.hotel.Hotel_Reservation_final.model.RoomReservation;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -39,5 +40,15 @@ public class RoomReservationDaoH {
         session.close();
         return reservations;
     }
+
+    public static RoomReservation showAllInfo (String reservation_code){
+
+        Session session = HibernateUtil.sessionFactory.openSession();
+        RoomReservation reservation = session.get(RoomReservation.class,reservation_code);
+        session.close();
+        return reservation;
+    }
+
+
 
 }
