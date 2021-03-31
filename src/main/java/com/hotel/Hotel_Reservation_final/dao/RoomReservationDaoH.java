@@ -19,14 +19,21 @@ public class RoomReservationDaoH {
         Random r = new Random( System.currentTimeMillis() );
         int random_code = r.nextInt(99999);
         RoomReservation reservation = new RoomReservation(customer_id,customer_fname,customer_lname,start,end,capacity,String.valueOf(random_code));
-
         Session session = HibernateUtil.sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(reservation);
-        session.getTransaction().commit();
-        session.close();
-
-        return reservation;
+        Transaction transaction = null;
+        try{
+            transaction =  session.beginTransaction();
+            session.save(reservation);
+            transaction.commit();
+            return reservation;
+        }catch (HibernateException exception){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            return null;
+        }finally {
+            session.close();
+        }
     }
 
     public static List viewAllRecords(int customer_id){
