@@ -1,6 +1,7 @@
 package com.hotel.Hotel_Reservation_final.controller;
 
 import com.hotel.Hotel_Reservation_final.dao.RoomReservationDao;
+import com.hotel.Hotel_Reservation_final.dao.RoomReservationDaoH;
 import com.hotel.Hotel_Reservation_final.model.RoomReservation;
 
 import javax.servlet.ServletException;
@@ -19,7 +20,8 @@ public class ModificationServlet extends HttpServlet {
         out.println("<html><body>");
         String code = request.getParameter("code");
         String option = request.getParameter("options");
-        RoomReservation reservation = RoomReservationDao.showAllInfo(code);
+        //RoomReservation reservation = RoomReservationDao.showAllInfo(code);
+        RoomReservation reservation = RoomReservationDaoH.showAllInfo(code);
         if(reservation != null){
             if(option.equals("view")){
                 out.println(reservation.toString());
@@ -27,7 +29,8 @@ public class ModificationServlet extends HttpServlet {
             else{
                 out.println("Here's your last reservation information : ");
                 out.println(reservation.toString());
-                RoomReservationDao.reservation = reservation;
+                //RoomReservationDao.reservation = reservation;
+                RoomReservationDaoH.keptReservation = reservation;
                 request.getRequestDispatcher("reservation.html").include(request, response);
             }
         }
