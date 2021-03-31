@@ -2,8 +2,13 @@ package com.hotel.Hotel_Reservation_final.dao;
 
 import com.hotel.Hotel_Reservation_final.hibernate.HibernateUtil;
 import com.hotel.Hotel_Reservation_final.model.RoomReservation;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 import java.util.Random;
 
 public class RoomReservationDaoH {
@@ -20,6 +25,19 @@ public class RoomReservationDaoH {
         session.close();
 
         return reservation;
+    }
+
+    public static List viewAllRecords(int customer_id){
+
+        Session session = HibernateUtil.sessionFactory.openSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<RoomReservation> criteriaQuery = criteriaBuilder.createQuery(RoomReservation.class);
+        Root<RoomReservation> root = criteriaQuery.from(RoomReservation.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("customer_id"),customer_id));
+        Query query = session.createQuery(criteriaQuery);
+        List reservations = query.getResultList();
+        session.close();
+        return reservations;
     }
 
 }
