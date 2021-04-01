@@ -4,7 +4,7 @@
     <property name="connection.url">jdbc:mysql://localhost:3306/hotel1</property>
     <property name="connection.username">root</property>
     <property name="connection.password">fuckingpassword</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="show_sql">true</property>
     <mapping class="com.hotel.Hotel_Reservation_final.model.RoomReservation"/>
 
