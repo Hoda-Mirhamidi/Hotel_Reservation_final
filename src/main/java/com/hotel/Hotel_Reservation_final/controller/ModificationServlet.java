@@ -20,8 +20,8 @@ public class ModificationServlet extends HttpServlet {
         out.println("<html><body>");
         String code = request.getParameter("code");
         String option = request.getParameter("options");
-        //RoomReservation reservation = RoomReservationDao.showAllInfo(code);
-        RoomReservation reservation = RoomReservationDaoH.showAllInfo(code);
+        RoomReservation reservation = RoomReservationDao.showAllInfo(code);
+        //RoomReservation reservation = RoomReservationDaoH.showAllInfo(code);
         if(reservation != null){
             if(option.equals("view")){
                 out.println(reservation.toString());
@@ -30,7 +30,7 @@ public class ModificationServlet extends HttpServlet {
                 out.println("Here's your last reservation information : ");
                 out.println(reservation.toString());
                 //RoomReservationDao.reservation = reservation;
-                RoomReservationDaoH.keptReservation = reservation;
+                RoomReservationDao.reservation = reservation;
                 request.getRequestDispatcher("reservation.html").include(request, response);
             }
         }
