@@ -18,10 +18,10 @@ public class CancellationServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         String code = request.getParameter("code");
-        //RoomReservation reservation = RoomReservationDao.showAllInfo(code);
-        RoomReservation reservation = RoomReservationDaoH.showAllInfo(code);
+        RoomReservation reservation = RoomReservationDao.showAllInfo(code);
+        //RoomReservation reservation = RoomReservationDaoH.showAllInfo(code);
         if(reservation != null){
-            if(RoomReservationDaoH.cancel(code)){ // Previously used RoomReservationDao cancel method
+            if(RoomReservationDao.cancel(code)){ // Previously used RoomReservationDao cancel method
                 out.println("Reservation canceled successfully !");
             }
             else{
