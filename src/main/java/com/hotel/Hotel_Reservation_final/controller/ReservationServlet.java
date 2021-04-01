@@ -1,6 +1,7 @@
 package com.hotel.Hotel_Reservation_final.controller;
 
 import com.hotel.Hotel_Reservation_final.dao.RoomReservationDao;
+import com.hotel.Hotel_Reservation_final.dao.RoomReservationDaoH;
 import com.hotel.Hotel_Reservation_final.model.RoomReservation;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,8 @@ public class ReservationServlet extends HttpServlet {
         out.println("<html><body>");
         String option = request.getParameter("options");
         if(option.equals("reserve")){
-            RoomReservation reservation = RoomReservationDao.addRecord(id,fname,lname,start,end,capacity);
+            RoomReservation reservation = RoomReservationDaoH.addRecord(id,fname,lname,start,end,capacity);
+            //RoomReservation reservation = RoomReservationDao.addRecord(id,fname,lname,start,end,capacity);
             if(reservation != null){
                 out.println("Reservation was successful ! ");
                 out.println("Reservation code : "+reservation.getReservation_code()+" , Room number : "+reservation.getRoom());
@@ -37,19 +39,21 @@ public class ReservationServlet extends HttpServlet {
             }
         }
         else{
-            String code = RoomReservationDao.reservation.getReservation_code();
+            String code = RoomReservationDaoH.keptReservation.getReservation_code();
+            //String code = RoomReservationDao.reservation.getReservation_code();
             RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,code);
-            RoomReservation updatedReservation = RoomReservationDao.updateInfo(reservation);
-            if(updatedReservation != null) {
+
+            if(RoomReservationDaoH.updateInfo(reservation)) {
                 out.println("Update was Successful ! ");
                 out.println("New Information : ");
-                out.println(updatedReservation.toString());
+                out.println(RoomReservationDaoH.showAllInfo(code).toString());
             }
             else {
                 out.println("An error occurred ! Please try again ...");
                 request.getRequestDispatcher("index.jsp").include(request,response);
             }
-            RoomReservationDao.reservation = new RoomReservation();
+            //RoomReservationDao.reservation = new RoomReservation();
+            RoomReservationDaoH.keptReservation = new RoomReservation();
         }
         out.println("</body></html>");
     }

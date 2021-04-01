@@ -1,7 +1,8 @@
 package com.hotel.Hotel_Reservation_final.model;
 
-import java.util.Date;
+import javax.persistence.*;
 
+@Entity
 public class RoomReservation {
     private int customer_id;
     private String customer_fname;
@@ -9,7 +10,11 @@ public class RoomReservation {
     private String start_date;
     private String end_date;
     private int capacity;
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int room;
+
+    @Id
     private String reservation_code;
 
     public RoomReservation(int customer_id, String customer_fname, String customer_lname, String start_date, String end_date, int capacity, String reservation_code) {
