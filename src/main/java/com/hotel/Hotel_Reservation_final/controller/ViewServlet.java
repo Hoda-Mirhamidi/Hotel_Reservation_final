@@ -23,13 +23,10 @@ public class ViewServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String id = request.getParameter("id");
         out.println("<html><body>");
-        //LinkedList<RoomReservation> reservations = RoomReservationDao.viewAllRecords(Integer.parseInt(id));
-        List reservations = RoomReservationDaoH.viewAllRecords(Integer.parseInt(id));
+        LinkedList<RoomReservation> reservations = RoomReservationDao.viewAllRecords(Integer.parseInt(id));
+        //List reservations = RoomReservationDaoH.viewAllRecords(Integer.parseInt(id));
         if(reservations != null){
-            for(Iterator iterator = reservations.iterator(); iterator.hasNext();){
-                RoomReservation r = (RoomReservation) iterator.next();
-                out.println("Room Reservation code : "+r.getReservation_code()+"  , Start date : "+r.getStart_date()+"  , End date : "+r.getEnd_date()+"  , Capacity : "+r.getCapacity()+"  , Room : "+r.getRoom()+"<br><br>");
-            }
+            reservations.stream().forEach(roomReservation -> System.out.println(roomReservation.toString() +"<br><br>"));
         }
         else{
             out.println("No reservations found !");
