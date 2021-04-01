@@ -1,6 +1,7 @@
 package com.hotel.Hotel_Reservation_final.controller;
 
 import com.hotel.Hotel_Reservation_final.dao.RoomReservationDao;
+import com.hotel.Hotel_Reservation_final.dao.RoomReservationDaoH;
 import com.hotel.Hotel_Reservation_final.model.RoomReservation;
 
 import javax.servlet.ServletException;
@@ -17,9 +18,10 @@ public class CancellationServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         String code = request.getParameter("code");
-        RoomReservation reservation = RoomReservationDao.showAllInfo(code);
+        //RoomReservation reservation = RoomReservationDao.showAllInfo(code);
+        RoomReservation reservation = RoomReservationDaoH.showAllInfo(code);
         if(reservation != null){
-            if(RoomReservationDao.cancel(code)){
+            if(RoomReservationDaoH.cancel(code)){ // Previously used RoomReservationDao cancel method
                 out.println("Reservation canceled successfully !");
             }
             else{
