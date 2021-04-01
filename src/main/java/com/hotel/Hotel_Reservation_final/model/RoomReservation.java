@@ -98,6 +98,7 @@ public class RoomReservation {
                 " , Start Date=" + start_date +
                 " , End Date=" + end_date +
                 " , Capacity=" + capacity +
-                " , Room=" + room ;
+                " , Room=" + room +
+                " , Reservation Code= "+reservation_code;
     }
 }
