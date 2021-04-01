@@ -1,10 +1,18 @@
 package com.hotel.Hotel_Reservation_final.model;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 public class User {
 
+    @Id
     private int user_id;
+    @Column @NotNull
     private String fname;
+    @Column @NotNull
     private String lname;
+    @Column @NotNull
     private String password;
 
     public int getUser_id() {
