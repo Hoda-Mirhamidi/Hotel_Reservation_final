@@ -1,9 +1,6 @@
 package com.hotel.Hotel_Reservation_final.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class RoomReservation {
