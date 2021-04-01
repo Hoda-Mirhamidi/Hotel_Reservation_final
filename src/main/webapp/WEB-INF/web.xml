@@ -13,6 +13,7 @@
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
         <servlet-name>modification</servlet-name>
         <servlet-class>com.hotel.Hotel_Reservation_final.controller.ModificationServlet</servlet-class>
@@ -62,6 +63,7 @@
         <filter-name>idFilter</filter-name>
         <url-pattern>/view</url-pattern>
     </filter-mapping>
+
 
     <filter>
         <filter-name>codeFilter</filter-name>
