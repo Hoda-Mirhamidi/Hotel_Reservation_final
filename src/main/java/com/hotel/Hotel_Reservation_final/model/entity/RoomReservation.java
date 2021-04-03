@@ -1,6 +1,8 @@
-package com.hotel.Hotel_Reservation_final.model;
+package com.hotel.Hotel_Reservation_final.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 public class RoomReservation {
@@ -11,10 +13,10 @@ public class RoomReservation {
     private String end_date;
     private int capacity;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int room;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int room ;
 
-    @Id
+    @Column (unique = true)
     private String reservation_code;
 
     public RoomReservation(int customer_id, String customer_fname, String customer_lname, String start_date, String end_date, int capacity, String reservation_code) {
@@ -26,6 +28,8 @@ public class RoomReservation {
         this.capacity = capacity;
         this.reservation_code = reservation_code;
     }
+
+
 
     public RoomReservation() {
 
@@ -106,4 +110,5 @@ public class RoomReservation {
                 " , Room=" + room +
                 " , Reservation Code= "+reservation_code;
     }
+
 }
