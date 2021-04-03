@@ -49,6 +49,33 @@
         <url-pattern>/cancellation</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>signUp</servlet-name>
+        <servlet-class>com.hotel.Hotel_Reservation_final.controller.SignUpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signUp</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>logIn</servlet-name>
+        <servlet-class>com.hotel.Hotel_Reservation_final.controller.LogInServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logIn</servlet-name>
+        <url-pattern>/logIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>logOut</servlet-name>
+        <servlet-class>com.hotel.Hotel_Reservation_final.controller.LogOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logOut</servlet-name>
+        <url-pattern>/logOut</url-pattern>
+    </servlet-mapping>
+
 
     <filter>
         <filter-name>idFilter</filter-name>
@@ -58,10 +85,10 @@
         <filter-name>idFilter</filter-name>
         <url-pattern>/reservation</url-pattern>
     </filter-mapping>
-    <filter-mapping>
+    <!--<filter-mapping>
         <filter-name>idFilter</filter-name>
         <url-pattern>/view</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <filter>
         <filter-name>codeFilter</filter-name>
