@@ -1,7 +1,7 @@
-package com.hotel.Hotel_Reservation_final.dao;
+package com.hotel.Hotel_Reservation_final.model.dao;
 
 import com.hotel.Hotel_Reservation_final.dbConnection.DBConnection;
-import com.hotel.Hotel_Reservation_final.model.RoomReservation;
+import com.hotel.Hotel_Reservation_final.model.entity.RoomReservation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -66,7 +66,7 @@ public class RoomReservationDao {
                 int capacity = rs.getInt("capacity");
                 int room = rs.getInt("room");
                 RoomReservation reservation = new RoomReservation(customer_id,fname,lname,start,end,capacity,code);
-                reservation.setRoom(room);
+                //reservation.setRoom(room);
                 reservations.add(reservation);
             }
             return reservations;
@@ -102,7 +102,7 @@ public class RoomReservationDao {
             int capacity = rs.getInt("capacity");
             int room = rs.getInt("room");
             RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,reservation_code);
-            reservation.setRoom(room);
+            //reservation.setRoom(room);
             System.out.println(reservation.toString());
             return reservation;
         } catch (SQLException throwables) {
