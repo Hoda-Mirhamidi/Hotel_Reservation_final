@@ -18,6 +18,9 @@ public class RoomReservation {
 
     @Column (unique = true)
     private String reservation_code;
+    @ManyToOne
+    @JoinColumn
+    private User user;
 
     public RoomReservation(int customer_id, String customer_fname, String customer_lname, String start_date, String end_date, int capacity, String reservation_code) {
         this.customer_id = customer_id;
