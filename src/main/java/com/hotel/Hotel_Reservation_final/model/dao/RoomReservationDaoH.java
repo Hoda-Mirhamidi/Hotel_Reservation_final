@@ -1,7 +1,7 @@
-package com.hotel.Hotel_Reservation_final.dao;
+package com.hotel.Hotel_Reservation_final.model.dao;
 
 import com.hotel.Hotel_Reservation_final.hibernate.HibernateUtil;
-import com.hotel.Hotel_Reservation_final.model.RoomReservation;
+import com.hotel.Hotel_Reservation_final.model.entity.RoomReservation;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,16 +11,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.Random;
 
 public class RoomReservationDaoH {
 
+
     public static RoomReservation keptReservation = new RoomReservation();
 
-    public static RoomReservation addRecord(int customer_id , String customer_fname , String customer_lname , String start , String end , int capacity){
-        Random r = new Random( System.currentTimeMillis() );
-        int random_code = r.nextInt(99999);
-        RoomReservation reservation = new RoomReservation(customer_id,customer_fname,customer_lname,start,end,capacity,String.valueOf(random_code));
+    public static RoomReservation addRecord(RoomReservation reservation){
         Session session = HibernateUtil.sessionFactory.openSession();
         Transaction transaction = null;
         try{
@@ -51,12 +48,19 @@ public class RoomReservationDaoH {
         return reservations;
     }
 
-    public static RoomReservation showAllInfo (String reservation_code){
+    public static RoomReservation getReservationByCode(String reservation_code){
 
         Session session = HibernateUtil.sessionFactory.openSession();
-        RoomReservation reservation = session.get(RoomReservation.class,reservation_code);
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<RoomReservation> cq = cb.createQuery(RoomReservation.class);
+        Root<RoomReservation> root = cq.from(RoomReservation.class);
+        cq.select(root).where(cb.equal(root.get("reservation_code"),reservation_code));
+        List reservations = session.createQuery(cq).getResultList();
         session.close();
-        return reservation;
+        if(reservations.size() == 0){
+            return null;
+        }
+        return (RoomReservation) reservations.get(0);
     }
 
     public static boolean cancel(String reservation_code){
@@ -65,7 +69,7 @@ public class RoomReservationDaoH {
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            RoomReservation reservation = showAllInfo(reservation_code);
+            RoomReservation reservation = getReservationByCode(reservation_code);
             session.delete(reservation);
             transaction.commit();
             return true;
