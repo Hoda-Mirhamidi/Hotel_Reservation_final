@@ -42,6 +42,7 @@ public class ReservationServlet extends HttpServlet {
                 int lastRoomNum = RoomReservationDaoH.getRoomNum();
                 String code = String.valueOf(10001+lastRoomNum);
                 RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,code);
+                reservation.setUser(UserDaoH.getUserById(id));
                 RoomReservation checkReservation = RoomReservationDaoH.addRecord(reservation);
                 //RoomReservation reservation = RoomReservationDao.addRecord(id,fname,lname,start,end,capacity);
                 if(checkReservation != null){
@@ -54,13 +55,12 @@ public class ReservationServlet extends HttpServlet {
                 }
             }
             else{
-                String code = RoomReservationDaoH.keptReservation.getReservation_code();
                 //String code = RoomReservationDao.reservation.getReservation_code();
-                RoomReservation reservation = new RoomReservation(id,fname,lname,start,end,capacity,code);
+                RoomReservation reservation = RoomReservationDaoH.keptReservation;
                 if(RoomReservationDaoH.updateInfo(reservation)) {
                     out.println("Update was Successful ! ");
                     out.println("New Information : ");
-                    out.println(RoomReservationDaoH.getReservationByCode(code).toString());
+                    out.println(RoomReservationDaoH.getReservationByCode(RoomReservationDaoH.keptReservation.getReservation_code()).toString());
                 }
                 else {
                     out.println("An error occurred ! Please try again ...");
