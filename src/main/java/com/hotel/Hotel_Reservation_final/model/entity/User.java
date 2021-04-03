@@ -19,6 +19,7 @@ public class User {
     private String password;
 
     @OneToMany
+    @JoinColumn
     List<RoomReservation> reservations = new ArrayList<>();
 
     public User() {
