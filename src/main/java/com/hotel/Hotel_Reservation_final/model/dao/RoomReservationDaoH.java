@@ -103,7 +103,7 @@ public class RoomReservationDaoH {
     }
 
 
-    private static int getRoomNum(){
+    public static int getRoomNum(){
         Session session = HibernateUtil.sessionFactory.openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<RoomReservation> criteriaQuery = criteriaBuilder.createQuery(RoomReservation.class);
