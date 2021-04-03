@@ -13,7 +13,9 @@ public class RoomReservation {
     private String end_date;
     private int capacity;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Min(1)
     private int room ;
 
     @Column (unique = true)
