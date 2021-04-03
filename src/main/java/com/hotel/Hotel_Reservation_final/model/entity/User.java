@@ -1,10 +1,9 @@
-package com.hotel.Hotel_Reservation_final.model;
+package com.hotel.Hotel_Reservation_final.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -18,6 +17,9 @@ public class User {
     private String lname;
     @Column @NotNull
     private String password;
+
+    @OneToMany
+    List<RoomReservation> reservations = new ArrayList<>();
 
     public User() {
 
